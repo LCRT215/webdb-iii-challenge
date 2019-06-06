@@ -1,0 +1,20 @@
+{
+  "name": "webdb-iii-challenge",
+  "version": "1.0.0",
+  "description": "Challenge Project for Web DB III",
+  "main": "index.js",
+  "repository": "https://github.com/LCRT215/webdb-iii-challenge.git",
+  "author": "Leslie Thompson",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^3.18.0",
+    "knex": "^0.17.3",
+    "nodemon": "^1.19.1",
+    "sqlite3": "^4.0.8"
+  }
+}
