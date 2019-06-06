@@ -10,6 +10,10 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 
+const errors = {
+  "19": "Another record with that value exists"
+};
+
 server.get("/api/cohorts", async (req, res) => {
   try {
     const cohorts = await db("cohorts");
@@ -18,6 +22,7 @@ server.get("/api/cohorts", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
 server.post("/api/cohorts", async (req, res) => {
   try {
     const [id] = await db("cohorts").insert(req.body);
@@ -30,6 +35,18 @@ server.post("/api/cohorts", async (req, res) => {
   } catch (error) {
     const message = errors[error.errno] || "We ran into an error";
     res.status(500).json({ message, error });
+  }
+});
+
+server.get("/api/cohorts/:id", async (req, res) => {
+  // get the roles from the database
+  try {
+    const cohort = await db("cohorts")
+      .where({ id: req.params.id })
+      .first();
+    res.status(200).json(cohort);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
