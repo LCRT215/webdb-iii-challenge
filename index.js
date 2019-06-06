@@ -49,7 +49,16 @@ server.get("/api/cohorts/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
+///////////////////////////////////
 
+server.get("/api/cohorts/:id/students", async (req, res) => {
+  try {
+    const cohorts = await db("students");
+    res.status(200).json(cohorts);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 const port = process.env.PORT || 4000;
 server.listen(port, () =>
   console.log(`\n** API running on http://localhost:${port} **\n`)
